@@ -1,0 +1,23 @@
+{
+  "name": "catalogizator",
+  "version": "0.0.1",
+  "description": "Application to keep track of downloaded content",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bonkboykz/catalogizator.git"
+  },
+  "author": "Yesset Zhussupov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bonkboykz/catalogizator/issues"
+  },
+  "homepage": "https://github.com/bonkboykz/catalogizator#readme",
+  "dependencies": {
+    "electron": "^1.8.6"
+  }
+}
