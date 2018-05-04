@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app dark>
+    <v-app>
       <v-navigation-drawer
         fixed
         :mini-variant="miniVariant"
@@ -27,32 +27,32 @@
       </v-navigation-drawer>
       <v-toolbar fixed app :clipped-left="clipped">
         <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-btn 
+        <!-- <v-btn 
           icon
           @click.native.stop="miniVariant = !miniVariant"
         >
           <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-        </v-btn>
-        <v-btn
+        </v-btn> -->
+        <!-- <v-btn
           icon
           @click.native.stop="clipped = !clipped"
         >
           <v-icon>web</v-icon>
-        </v-btn>
-        <v-btn
+        </v-btn> -->
+        <!-- <v-btn
           icon
           @click.native.stop="fixed = !fixed"
         >
           <v-icon>remove</v-icon>
-        </v-btn>
+        </v-btn> -->
         <v-toolbar-title v-text="title"></v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn
+        <!-- <v-btn
           icon
           @click.native.stop="rightDrawer = !rightDrawer"
         >
           <v-icon>menu</v-icon>
-        </v-btn>
+        </v-btn> -->
       </v-toolbar>
       <v-content>
         <v-container fluid fill-height>
@@ -61,7 +61,7 @@
           </v-slide-y-transition>
         </v-container>
       </v-content>
-      <v-navigation-drawer
+      <!-- <v-navigation-drawer
         temporary
         fixed
         :right="right"
@@ -80,7 +80,7 @@
       <v-footer :fixed="fixed" app>
         <v-spacer></v-spacer>
         <span>&copy; 2017</span>
-      </v-footer>
+      </v-footer> -->
     </v-app>
   </div>
 </template>
@@ -90,16 +90,16 @@
     name: 'catalogizator',
     data: () => ({
       clipped: false,
-      drawer: true,
+      drawer: false,
       fixed: false,
       items: [
-        { icon: 'apps', title: 'Welcome', to: '/' },
-        { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
+        { icon: 'apps', title: 'Items', to: '/' },
+        // { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Catalogizator'
     })
   }
 </script>
