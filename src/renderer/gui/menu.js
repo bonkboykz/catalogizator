@@ -1,5 +1,9 @@
 import bus from '../bus';
 import { remote } from 'electron';
+import fs from 'fs';
+import path from 'path';
+
+import { items } from '../db/controllers/index';
 
 function createApplicationMenu() {
   const mainMenuTemplate = [
@@ -11,6 +15,73 @@ function createApplicationMenu() {
           accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
           click() {
             bus.$emit('item:new');
+          }
+        },
+        {
+          label: 'Bunch import items',
+          click() {
+            console.log('Import items');
+            // console.log(
+            //   remote.dialog.showOpenDialog({
+            //     properties: ['openFile', 'openDirectory', 'multiSelections']
+            //   })
+            // );
+            const itemDirArrays = remote.dialog.showOpenDialog({
+              properties: ['openFile', 'openDirectory', 'multiSelections']
+            });
+            const checkByFileExt = (file) => {
+              const ext = path.extname(file);
+              console.log(ext);
+              switch (ext) {
+                case '.mp4':
+                case '.mkv':
+                case '.avi':
+                  return true;
+                case '.epub':
+                case '.fb2':
+                case '.mobi':
+                case '.pdf':
+                  return true;
+              }
+              return false;
+            };
+            itemDirArrays.forEach(itemDirArr => {
+              fs.readdirSync(itemDirArr).forEach((filename) => {
+                console.log(filename);
+                const isDir = fs
+                  .statSync(path.join(itemDirArr, filename))
+                  .isDirectory();
+                if (!isDir && !checkByFileExt(filename)) return;
+                console.log('pass');
+                const newItem = {
+                  title: filename,
+                  type: path.basename(itemDirArr),
+                  location: itemDirArr
+                };
+                console.log(path.basename(itemDirArr));
+                console.log(newItem);
+                items
+                  .createItem(newItem)
+                  .then((result) => {
+                    console.log('Item: ' + result.title + ' created.');
+                    bus.$emit('item:list_updated');
+                  })
+                  .catch((e) => console.error(e));
+              });
+            })
+          }
+        },
+        { type: 'separator' },
+        {
+          label: 'Delete all items',
+          click() {
+            items
+              .deleteAllItems()
+              .then((result) => {
+                console.log(result);
+                bus.$emit('item:list_updated');
+              })
+              .catch((e) => console.error(e));
           }
         }
       ]

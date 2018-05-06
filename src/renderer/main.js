@@ -8,7 +8,7 @@ import router from './router';
 import store from './store';
 
 import './gui/menu.js';
-import './gui/tray.js';
+// import './gui/tray.js';
 
 Vue.use(Vuetify);
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'));

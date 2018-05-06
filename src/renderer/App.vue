@@ -45,8 +45,8 @@
         >
           <v-icon>remove</v-icon>
         </v-btn> -->
-        <v-toolbar-title v-text="title"></v-toolbar-title>
-        <v-spacer></v-spacer>
+        <!-- <v-toolbar-title v-text="title"></v-toolbar-title>
+        <v-spacer></v-spacer> -->
         <!-- <v-btn
           icon
           @click.native.stop="rightDrawer = !rightDrawer"
@@ -55,7 +55,8 @@
         </v-btn> -->
       </v-toolbar>
       <v-content>
-        <v-container fluid fill-height>
+        <!-- <v-container fluid fill-height> -->
+        <v-container fluid>
           <v-slide-y-transition mode="out-in">
             <router-view></router-view>
           </v-slide-y-transition>
@@ -86,25 +87,26 @@
 </template>
 
 <script>
-  export default {
-    name: 'catalogizator',
-    data: () => ({
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        { icon: 'apps', title: 'Items', to: '/' },
-        // { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Catalogizator'
-    })
-  }
+export default {
+  name: 'catalogizator',
+  data: () => ({
+    clipped: false,
+    drawer: false,
+    fixed: false,
+    items: [
+      { icon: 'apps', title: 'Items', to: '/' },
+      { icon: 'apps', title: 'Analyze', to: 'analyze' },
+      // { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
+    ],
+    miniVariant: false,
+    right: true,
+    rightDrawer: false,
+    title: 'Catalogizator',
+  }),
+};
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
-  /* Global CSS */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
+/* Global CSS */
 </style>

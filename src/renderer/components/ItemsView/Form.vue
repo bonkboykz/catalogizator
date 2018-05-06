@@ -16,11 +16,16 @@
     <v-text-field
       label="Title"
       v-model="form.title"
+      :rules="form.rules.title"
     ></v-text-field>
-    <v-text-field
-      label="Type"
-      v-model="form.type"
-    ></v-text-field>
+    <v-select
+        :items="defaultTypes"
+        v-model="form.type"
+        label="Type"
+        item-text="text"
+        item-value="value"
+        single-line
+      ></v-select>
     <v-text-field
       label="Location"
       v-model="form.location"
@@ -39,14 +44,28 @@
 
 <script>
 export default {
-  props: [ 'item' ],
+  props: ['item'],
   data: () => ({
     form: {
       valid: true,
       title: '',
       type: '',
       location: '',
+      rules: {
+        title: [
+          v => !!v || 'Title is required'
+        ]
+      }
     },
+    defaultTypes: [
+      { text: 'Movies', value: 'Movies' },
+      { text: 'Books', value: 'Books' },
+      { text: 'TV Series', value: 'TV Series' },
+      { text: 'Cartoons', value: 'Cartoons' },
+      { text: 'Comics', value: 'Comics' },
+      { text: 'Anime', value: 'Anime' },
+      { text: 'Tutorials', value: 'Tutorials' },
+    ],
     // name: '',
     // nameRules: [
     //   v => !!v || 'Name is required',
@@ -62,8 +81,8 @@ export default {
   }),
   computed: {
     isEditForm() {
-      return (!!this.item);
-    }
+      return !!this.item;
+    },
   },
   methods: {
     close() {
@@ -74,7 +93,7 @@ export default {
         title: this.form.title,
         type: this.form.type,
         location: this.form.location,
-        _id: (this.isEditForm) ? this.item._id : null,
+        _id: this.isEditForm ? this.item._id : null,
       });
     },
   },

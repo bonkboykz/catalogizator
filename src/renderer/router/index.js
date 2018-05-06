@@ -10,6 +10,11 @@ export default new Router({
       name: 'items-view',
       component: require('@/components/ItemsView').default
     },
+    {
+      path: '/analyze',
+      name: 'analyze-view',
+      component: require('@/components/AnalyzeView').default
+    },
     // {
     //   path: '/',
     //   name: 'welcome-view',
